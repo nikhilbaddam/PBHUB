@@ -8,9 +8,9 @@ require('dotenv').config();
 
 
 const email= process.env.EMAIL;
-console.log(email)
+
 const pass=process.env.PASSWORD;
-console.log(pass)
+
 // Nodemailer configuration
 const transporter = nodemailer.createTransport({
     service: 'Gmail',
