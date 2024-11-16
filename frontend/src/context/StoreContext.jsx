@@ -5,7 +5,7 @@ export const StoreContext=createContext(null)
 const StoreContextProvider=(props)=>
 {
 
-    const url="http://localhost:4000";
+    const url="pghub-dalziwx2e-nikhil-reddys-projects-caec74ee.vercel.app";
     const [token, setToken] = useState(localStorage.getItem("token") || "");
     const [user, setUser] = useState(null); // Store user details here
 
