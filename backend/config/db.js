@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
  const connectDB=async()=>{
-    await mongoose.connect('mongodb://localhost:27017/Hotels').then(()=>console.log("DB connected"));
+    await mongoose.connect(process.env.MONGODB_CONNECTION).then(()=>console.log("DB connected"));
 
 
 }
