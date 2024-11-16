@@ -7,13 +7,16 @@ const crypto = require("crypto");
 require('dotenv').config();
 
 
-
+const email= process.env.EMAIL;
+console.log(email)
+const pass=process.env.PASSWORD;
+console.log(pass)
 // Nodemailer configuration
 const transporter = nodemailer.createTransport({
     service: 'Gmail',
     auth: {
-        user: "nikhilreddyb457@gmail.com", // Your email
-        pass: "wgil odco ozpb ndgz",  // Your email password
+        user: email, // Your email
+        pass: pass  // Your email password
     }
 });
 
