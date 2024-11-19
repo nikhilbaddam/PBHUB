@@ -1,19 +1,21 @@
-import React, { useState } from "react";
-import axios from "axios";
+import React from "react";
 import AddBedModel from "../components/AdminComponents/AddBedModel";
+import AddWorker from "../components/AdminComponents/AddWorker";
 
 const Admin = () => {
-  const [beds, setBeds] = useState([]);
-
-  const handleBedAdded = (newBed) => {
-    setBeds((prevBeds) => [...prevBeds, newBed]);
-  };
-
   return (
-    <div>
-      <h1 className="text-2xl font-bold mb-4">Admin Panel</h1>
-      <AddBedModel onBedAdded={handleBedAdded} />
-    </div>
+    <div className="flex flex-wrap gap-6 p-4 bg-gray-100">
+  {/* Add Bed Model Component */}
+  <div className="w-full md:w-1/2 lg:w-1/4">
+    <AddBedModel />
+  </div>
+
+  {/* Add Worker Component */}
+  <div className="w-full md:w-1/2 lg:w-1/2">
+    <AddWorker />
+  </div>
+</div>
+
   );
 };
 
