@@ -2,6 +2,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import moment from 'moment'
+import { FaBars, FaTimes } from 'react-icons/fa';
 import { StoreContext } from '../../context/StoreContext';
 
 const PaymentHistoryModal = ({ guest, onClose }) => {
@@ -36,6 +37,7 @@ const PaymentHistoryModal = ({ guest, onClose }) => {
                                     {moment(payment.paymentDate).format('DD-MMM-YYYY')} - {payment.amount} - {payment.note}
                                    
                                 </li>
+                                
                             ))}
                         </ul>
                     ) : (

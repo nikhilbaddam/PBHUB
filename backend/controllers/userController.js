@@ -29,7 +29,7 @@ const generateOTP = () => {
 // Login User
 // Login User
 const loginuser = async (req, res) => {
-    const { identifier, password } = req.body;
+    const { identifier, password,role } = req.body;
     try {
         // Check if the identifier is email or phone number
         let user;
@@ -40,13 +40,18 @@ const loginuser = async (req, res) => {
         }
 
         if (!user) {
-            return res.json({ success: false, message: "User does not exist" });
+            return res.status(400).json({ success: false, message: "User does not exist" });
+        }
+        if(user.role!=role)
+        {
+            return res.status(400).json({success:false,message:`You dont come under "${role}" check role again`})
         }
 
+        
         // Compare password
         const ismatch = await bcrypt.compare(password, user.password);
         if (!ismatch) {
-            return res.json({ success: false, message: "Invalid credentials" });
+            return res.status(400).json({ success: false, message: "Icorrect Password Try again .." });
         }
 
         // Generate token

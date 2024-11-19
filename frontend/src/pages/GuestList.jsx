@@ -23,7 +23,7 @@ const GuestList = () => {
                 const guestsData = response.data;
                 const guestsWithPaymentStatus = await Promise.all(
                     guestsData.map(async (guest) => {
-                        const paymentStatusResponse = await axios.get(`${url}/guests/left&overdays/${guest._id}`);
+                        const paymentStatusResponse = await axios.get(`${url}/guests/leftoverdays/${guest._id}`);
                         return { ...guest, paymentStatus: paymentStatusResponse.data };
                     })
                 );

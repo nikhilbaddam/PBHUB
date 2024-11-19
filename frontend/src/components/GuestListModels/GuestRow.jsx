@@ -3,7 +3,7 @@ import React from 'react';
 import moment from 'moment';
 
 const GuestRow = ({ guest, handleImageClick, handleUpdatePaymentClick, togglePaymentHistory,expandedGuestId }) => {
-    const paymentText = guest.paymentStatus.overdueDays > 0
+    const paymentText = guest.paymentStatus.overdueDays< 0
         ? `${guest.paymentStatus.overdueDays} overdue`
         : `${guest.paymentStatus.leftoverDays} left `;
 
@@ -23,7 +23,7 @@ const GuestRow = ({ guest, handleImageClick, handleUpdatePaymentClick, togglePay
             <td className="py-1 md:py-3 px-3 md:px-5 border">{guest.phoneNumber}</td>
             <td className="py-1 md:py-3 px-3 md:px-5 border">{guest.roomNumber}</td>
             <td className="py-1 md:py-3 px-3 md:px-5 border">{moment(guest.lastPaymentDate).format('DD-MMM-YYYY')}</td>
-            <td className={`py-1 md:py-3 px-3 md:px-5 border ${guest.paymentStatus.overdueDays > 0 ? 'text-red-500' : 'text-green-500'}`}>
+            <td className={`py-1 md:py-3 px-3 md:px-5 border ${guest.paymentStatus.overdueDays  > 0 ? 'text-red-500' : 'text-green-500'}`}>
                 {paymentText}
             </td>
             <td className="py-1 md:py-3 px-3 md:px-5 border">

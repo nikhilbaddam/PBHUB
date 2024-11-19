@@ -87,16 +87,16 @@ const Navbar = () => {
 
             {/* Mobile Menu */}
             {showMenu && (
-                <div className='md:hidden bg-gray-800 mt-4 p-4 rounded-lg shadow-lg'>
-                    <ul className='flex flex-col items-start gap-4 font-medium'>
+                <div className='  md:hidden bg-gray-800 mt-4 p-4 rounded-lg shadow-lg'>
+                    <ul className='  flex flex-col items-start gap-4 font-medium'>
                         <NavLink to='/' onClick={toggleMenu} className='hover:text-primary transition-colors duration-200'>
                             <li>HOME</li>
                         </NavLink>
                         <NavLink to='/addguests' onClick={toggleMenu} className='hover:text-primary transition-colors duration-200'>
-                            <li>AddGuests</li>
+                            <li>AddGuest</li>
                         </NavLink>
-                        <NavLink to='/guests' onClick={toggleMenu} className='hover:text-primary transition-colors duration-200'>
-                            <li>GUESTS</li>
+                        <NavLink to='/guestslist' onClick={toggleMenu} className='hover:text-primary transition-colors duration-200'>
+                            <li>GUESTSLIST</li>
                         </NavLink>
                         {user?.role === 'admin' && (
                             <>

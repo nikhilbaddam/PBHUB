@@ -8,8 +8,14 @@ export default {
     extend: {
       colors:{
         'primary':"#5f6FFF"
-      }
+      },animation: {
+        spin: 'spin 1s linear infinite', // Default spin animation
+      },
     },
   },
   plugins: [],
 }
+
+
+
+
