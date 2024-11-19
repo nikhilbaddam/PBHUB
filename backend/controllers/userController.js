@@ -80,13 +80,18 @@ const registeruser = async (req, res) => {
 
     try {
         // Check if user with the email or phone already exists
-        let userExists = await User.findOne({
-            $or: [{ email: email }, { phone: phone }]
+        let emailExists = await User.findOne({
+             email: email 
         });
-        
-        if (userExists) {
-            return res.json({ success: false, message: "User already exists with this email or phone number" });
+        if (emailExists) {
+            return res.status(400).json({ success: false, message: "User already exists with this email" });
         }
+        let phoneExists = await User.findOne({
+            phone: phone 
+       });
+       if (phoneExists) {
+           return res.status(400).json({ success: false, message: "User already exists with this phone number" });
+       }
 
         // Validate email format
         if (!validator.isEmail(email)) {
@@ -95,7 +100,7 @@ const registeruser = async (req, res) => {
 
         // Validate password strength
         if (password.length < 8) {
-            return res.json({ success: false, message: "Password must be at least 8 characters long" });
+            return res.status(400).json({ success: false, message: "Password must be at least 8 characters long" });
         }
 
         // Hash the password

@@ -5,7 +5,7 @@ const Bed=require('../models/bedModel.js');
 // Controller to add a new bed with the next available bed number in the specified room
 const addBed = async (req, res) => {
     try {
-        const { floor, section, room } = req.body;
+        const { floor, section, room,amount } = req.body;
 
         // Find the existing beds in the specified room, sorted by bed number in descending order
         const existingBed = await Bed.findOne({ floor, section, room })
@@ -21,7 +21,8 @@ const addBed = async (req, res) => {
             section,
             room,
             bed: nextBedNumber,
-            isOccupied: false
+            isOccupied: false,
+            amount
         });
 
         // Save the new bed to the database
