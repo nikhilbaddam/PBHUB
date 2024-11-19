@@ -265,7 +265,7 @@ const AddGuests = () => {
 
             {isBedModalOpen && (
                 <BedsModel
-                    url={url}
+                   
                     onClose={() => setIsBedModalOpen(false)}
                     onSelectBed={handleSelectBed}
                 />

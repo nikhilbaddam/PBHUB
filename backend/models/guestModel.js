@@ -17,7 +17,8 @@ const GuestSchema = new mongoose.Schema({
     bedId:{type:String},
     amount: { type: Number, required: true },
     regDate: { type: Date, required: true },
-    lastPaymentDate: { type: Date, required: true, default: function() { return this.regDate } },
+    lastPaymentDate: { type: Date, required: true },
+    nextPaymentDate:{type:Date},
     paymentHistory: [PaymentSchema], // Correctly define paymentHistory as an array of PaymentSchema
     initialPayment: { type: Date, required: true },
     referedBy:{type:String},

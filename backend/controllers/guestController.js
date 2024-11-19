@@ -75,6 +75,8 @@ const addGuest = async (req, res) => {
             return res.status(400).json({ message: "Bed is already occupied" });
         }
         const roomNumberz=bed.floor+"-"+bed.section+"-"+bed.room
+       const nextpayment=new Date(regDate);
+       nextpayment.setMonth(nextpayment.getMonth()+1);
 
         // Create a new guest with the bedId
         const newGuest = new Guest({
@@ -86,6 +88,7 @@ const addGuest = async (req, res) => {
             amount,
             regDate,
             lastPaymentDate,
+            nextPaymentDate:nextpayment,
             initialPayment,
             referedBy,
             bedId: bedId, // Store bedId in newGuest
@@ -171,10 +174,9 @@ const updateGuest = async (req, res) => {
 
 // Controller to delete an existing guest
 const deleteGuest = async (req, res) => {
-    console.log("Delete route accessed");
+    
     const { id } = req.params;
-    console.log(id);
-    console.log("nikhil")
+    
     
     try {
         const guest = await Guest.findById(id);
@@ -226,7 +228,7 @@ const getAllGuests = async (req, res) => {
 // Controller to update payment information for a guest
 const updatePayment = async (req, res) => {
     const { guestId } = req.params; // Guest ID from request parameters
-    const { amount, paymentDate, note } = req.body; // Payment details from the request body
+    const {  amount, paymentDate, note } = req.body; // Payment details from the request body
 
     try {
         // Find the guest by ID
@@ -235,7 +237,11 @@ const updatePayment = async (req, res) => {
         if (!guest) {
             return res.status(404).json({ message: "Guest not found" });
         }
-
+        const nextpayment=new Date(guest.nextPaymentDate || guest.regDate);
+        nextpayment.setMonth(nextpayment.getMonth()+1);
+        guest.nextPaymentDate=nextpayment;
+        
+        
         // Create a new payment record
         const newPayment = {
             amount,
@@ -257,12 +263,64 @@ const updatePayment = async (req, res) => {
             guest,
         });
     } catch (error) {
+        console.log(error)
         res.status(500).json({
             message: "Server error",
             error: error.message,
         });
     }
 };
+
+
+
+const getPaymentStatus = async (req, res) => {
+    const { guestId } = req.params; // Guest ID from request parameters
+
+    try {
+        // Find the guest by ID
+        const guest = await Guest.findById(guestId);
+
+        if (!guest) {
+            return res.status(404).json({ message: "Guest not found" });
+        }
+
+
+        
+        
+
+        const currentDate = new Date(); // Current date
+       
+        const nextPayment=new Date(guest.nextPaymentDate || guest.regDate);
+        
+        // Calculate days left until the next payment due date
+        const timeDifference = nextPayment.getTime() - currentDate.getTime();
+        const daysDifference = Math.ceil(timeDifference / (1000 * 3600 * 24)); // Convert from milliseconds to days
+
+        let overdueDays=0;
+        let leftoverDays=0;
+        if(daysDifference>0)
+        {
+            leftoverDays=daysDifference;
+        }
+        else{
+            overdueDays=daysDifference;
+
+        }
+
+        res.status(200).json({
+            message: "Payment status retrieved successfully",
+            leftoverDays,overdueDays
+            
+        });
+    } catch (error) {
+        res.status(500).json({
+            message: "Server error",
+            leftoverDays,
+            overdueDays
+        });
+    }
+};
+
 
 const getHistory=async(req,res)=>{
     const {guestId}=req.params;
@@ -286,67 +344,7 @@ const getHistory=async(req,res)=>{
 
 
 // Controller to calculate overdue days and leftover days
-const getPaymentStatus = async (req, res) => {
-    const { guestId } = req.params; // Guest ID from request parameters
 
-    try {
-        // Find the guest by ID
-        const guest = await Guest.findById(guestId);
-
-        if (!guest) {
-            return res.status(404).json({ message: "Guest not found" });
-        }
-
-        const currentDate = new Date(); // Current date
-        const lastPaymentDate = new Date(guest.lastPaymentDate || guest.regDate); // 14-Nov-2024
-        const regDateForNextPayment=new Date(guest.regDate);//10-Sep-2024
-
-        // Calculate next payment due date (1 month after last payment)
-        const nextPaymentDueDate = new Date(regDateForNextPayment);
-        nextPaymentDueDate.setMonth(nextPaymentDueDate.getMonth() + 1);
-
-        // Calculate days left until the next payment due date
-        const timeDifference = nextPaymentDueDate.getTime() - currentDate.getTime();
-        const daysDifference = Math.ceil(timeDifference / (1000 * 3600 * 24)); // Convert from milliseconds to days
-        
-        let leftoverDays = 0;
-        let overdueDays = 0;
-        if(lastPaymentDate>nextPaymentDueDate )
-        {
-            const nextofnextpaymentdate=new Date(nextPaymentDueDate)
-            nextofnextpaymentdate.setMonth(nextofnextpaymentdate.getMonth() + 1);
-            const timeDifferencefornext=nextofnextpaymentdate.getTime()-currentDate.getTime()
-            const daysDifferencefornext=Math.ceil(timeDifferencefornext / (1000 * 3600 * 24));
-            
-            leftoverDays=daysDifferencefornext;
-        }
-        else if(daysDifference>0){
-
-            leftoverDays=daysDifference
-
-        }
-        else{
-            overdueDays = Math.abs(daysDifference);
-
-        }
-        
-
-
-        
-
-        res.status(200).json({
-            message: "Payment status retrieved successfully",
-            leftoverDays,
-            overdueDays,
-            nextPaymentDueDate: nextPaymentDueDate.toISOString().split('T')[0], // Show in YYYY-MM-DD format
-        });
-    } catch (error) {
-        res.status(500).json({
-            message: "Server error",
-            error: error.message,
-        });
-    }
-};
 
 
 module.exports = {

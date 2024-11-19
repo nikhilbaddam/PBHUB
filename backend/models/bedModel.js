@@ -6,7 +6,8 @@ const mongoose=require('mongoose');
     room:{type:Number},
     bed:{type:Number},
     isOccupied:{type:Boolean,default:false},
-    guestId:{type:String}
+    guestId:{type:String},
+    amount:{type:Number}
 
  })
 

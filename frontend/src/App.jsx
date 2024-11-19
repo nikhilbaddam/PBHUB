@@ -7,6 +7,7 @@ import Guests from './pages/Guests'
 import Login from './components/Login'
 import AddGuests from './pages/AddGuests'
 import GuestList from './pages/GuestList.jsx'
+import Admin from './pages/Admin.jsx'
 
 const App = () => {
   return (
@@ -17,6 +18,8 @@ const App = () => {
         <Route path='/guestslist' element={<GuestList/>}/>
         <Route path='/login' element={<Login/>} />
         <Route path='/addguests' element={<AddGuests/>}/>
+
+        <Route path='/admin' element={<Admin/>}/>
         
         <Route path='/guests' element={<Guests/>} />
       </Routes>

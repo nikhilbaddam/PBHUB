@@ -20,5 +20,5 @@ router.get('/gethistory/:guestId',getHistory)
 
 router.get('/getguests',getAllGuests);
 router.put('/paymentupdate/:guestId',updatePayment);
-router.get('/left&overdays/:guestId',getPaymentStatus);
+router.get('/leftoverdays/:guestId',getPaymentStatus);
 module.exports = router;
