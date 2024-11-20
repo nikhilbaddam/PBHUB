@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import axios from "axios";
 import { StoreContext } from "../../context/StoreContext";
-
+import Loader from '../Loader'
 const AddWorker = () => {
   const [workerData, setWorkerData] = useState({
     name: "",
@@ -171,7 +171,7 @@ const AddWorker = () => {
           }`}
           disabled={loading}
         >
-          {loading ? "Adding..." : "Add Worker"}
+          {loading ? <Loader/> : "Add Worker"}
         </button>
       </form>
     </div>

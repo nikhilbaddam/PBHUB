@@ -2,8 +2,10 @@ import React, { useContext, useState } from 'react';
 import axios from 'axios';
 import { StoreContext } from '../context/StoreContext';
 import BedsModel from '../components/BedsModel';
-
+import Loader from '../components/Loader'
 const AddGuests = () => {
+
+    const [loading, setLoading] = useState(false);
     const [guestData, setGuestData] = useState({
         name: '',
         email: '',
@@ -57,17 +59,21 @@ const AddGuests = () => {
         }
 
         try {
+            setLoading(true); // Start loading
             const response = await axios.post(`${url}/guests/addguest`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
             });
-            alert('Guest added successfully');
+            
             
         } catch (error) {
             console.error('Error adding guest:', error);
             alert('Failed to add guest');
         }
+        finally {
+            setLoading(false); // Stop loading
+          }
     };
 
 
@@ -84,7 +90,7 @@ const AddGuests = () => {
     };
 
     return (
-        <form onSubmit={handleSubmit} className="max-w-3xl my-6 mx-auto p-8 bg-white shadow-md rounded-lg space-y-6">
+        <form onSubmit={handleSubmit} className="max-w-3xl mt-3 my-6 mx-auto p-8 bg-white shadow-md rounded-lg space-y-6">
             <h2 className="text-3xl font-semibold text-center">Add Guest</h2>
 
             <div className="grid gap-4 grid-cols-1 md:grid-cols-2">
@@ -258,9 +264,12 @@ const AddGuests = () => {
 
             <button
                 type="submit"
-                className="w-full bg-indigo-600 text-white py-3 px-4 rounded-md hover:bg-indigo-700"
-            >
-                Add Guest
+                className={`w-full p-3 text-white rounded-md mt-4 ${
+                    loading ? "bg-gray-400 cursor-not-allowed" : "bg-blue-500"
+                  }`}
+                  disabled={loading}
+                >
+                  {loading ? <Loader/> : "Add Guest"}
             </button>
 
             {isBedModalOpen && (
