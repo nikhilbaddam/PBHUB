@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { FaBars, FaTimes } from 'react-icons/fa'; // Icons for hamburger menu
 import { StoreContext } from '../context/StoreContext';
-import image from '../assets/logobg.gif'
+import image from '../assets/images-2.png'
 const Navbar = () => {
     const navigate = useNavigate();
     const { token, setToken, user} = useContext(StoreContext);
@@ -31,7 +31,7 @@ const Navbar = () => {
             <div className='flex items-center justify-between'>
                 <div className='flex flex-row items-center justify-between ' >
                 <h1 className='text-2xl font-semibold cursor-pointer'>PGHUB</h1>
-                <img src={image} alt="" className='w-12 decoration-white' />
+                <img src={image} alt="" className='w-12 ml-2 rounded-full decoration-white' />
                 </div>
 
                 {/* Desktop Navigation */}
