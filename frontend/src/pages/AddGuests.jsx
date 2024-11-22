@@ -64,7 +64,23 @@ const AddGuests = () => {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
+
+
             });
+            setGuestData({ name: '',
+                email: '',
+                phoneNumber: '',
+                
+                roomType: '',
+                amount: '',
+                regDate: '',
+                lastPaymentDate: '',
+                initialPayment: '',
+                referedBy: '',
+                adhaarImage: null,
+                profileImage: null,
+                bedId:""})
+
             
             
         } catch (error) {
