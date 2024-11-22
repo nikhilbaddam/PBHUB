@@ -46,8 +46,29 @@ const getAllBeds = async (req, res) => {
     }
 };
 
+const deleteBed=async(req,res)=>
+{
+
+    const {bedId}=req.params
+    try {
+        const bed =Bed.findById(bedId);
+        if(!bed)
+        {
+            return res.status(404).json({ message: "bed not found" });
+        }
+        await Bed.findByIdAndDelete(bedId);
+        res.status(200).json({ message: "bed deleted successfully" });
+        
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({ message: "Server error cant delete", error: error.message });
+
+        
+    }
+}
 
 
 
 
-module.exports = { addBed ,getAllBeds};
+
+module.exports = { addBed ,getAllBeds,deleteBed};

@@ -221,6 +221,30 @@ const getAllGuests = async (req, res) => {
     }
 };
 
+//get single guest
+const getGuest=async(req,res)=>
+{
+    const {guestId}=req.params;
+    
+
+
+    try{
+
+        const guest = await Guest.findById(guestId);
+        if (!guest) {
+            return res.status(404).json({ message: "Guest not found" });
+        }
+        res.status(200).json(guest);
+
+
+    }
+    catch(error){
+        res.status(500).json({ message: "Server error", error: error.message });
+
+
+    }
+}
+
 
 
 
@@ -355,5 +379,6 @@ module.exports = {
     upload,
     updateGuest,
     deleteGuest,
-    getHistory
+    getHistory,
+    getGuest
 };

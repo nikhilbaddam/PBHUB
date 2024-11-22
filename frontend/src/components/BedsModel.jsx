@@ -35,17 +35,22 @@ const BedsModel = ({ onClose, onSelectBed }) => {
     beds.reduce((acc, bed) => {
       const floorKey = `Floor ${bed.floor}`;
       const sectionKey = bed.section || "Section A"; // Default section
-
+  
       if (!acc[floorKey]) acc[floorKey] = {};
       if (!acc[floorKey][sectionKey]) acc[floorKey][sectionKey] = {};
-
+  
       const roomKey = `Room ${bed.room}`;
       if (!acc[floorKey][sectionKey][roomKey]) acc[floorKey][sectionKey][roomKey] = [];
-
+  
       acc[floorKey][sectionKey][roomKey].push(bed);
       return acc;
     }, {})
-  );
+  ).sort(([a], [b]) => {
+    const floorA = parseInt(a.replace("Floor ", ""), 10);
+    const floorB = parseInt(b.replace("Floor ", ""), 10);
+    return floorA - floorB;
+  });
+  
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75">

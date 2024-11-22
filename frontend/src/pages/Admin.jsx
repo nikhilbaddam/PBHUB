@@ -1,6 +1,7 @@
 import React from "react";
 import AddBedModel from "../components/AdminComponents/AddBedModel";
-import AddWorker from "../components/AdminComponents/AddWorker";
+
+import HotelBluePrint from "../components/AdminComponents/HotelBluePrint";
 
 const Admin = () => {
   return (
@@ -10,9 +11,9 @@ const Admin = () => {
     <AddBedModel />
   </div>
 
-  {/* Add Worker Component */}
+  
   <div className="w-full md:w-1/2 lg:w-1/2">
-    <AddWorker />
+    <HotelBluePrint />
   </div>
 </div>
 
