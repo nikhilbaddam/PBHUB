@@ -3,7 +3,7 @@ Introduction
 PGHub is a comprehensive platform designed for managing guest records, room allocations, and payment tracking. 
 It features an admin dashboard for monitoring key metrics, ensuring seamless guest management for PG (Paying Guest) facilities.
 
-...........................................Role-Based Access Control (RBAC).................................
+...........................................Role-Based Access Control (RBAC)...................................................................................................................
 This project implements Role-Based Access Control (RBAC) to enhance security and usability by controlling user access based on their assigned roles. 
 RBAC ensures that users only access the pages and functionalities relevant to their role, minimizing the risk of unauthorized actions and improving user experience.
 
@@ -32,7 +32,7 @@ Secure Workflow:
   Each user action is validated against their assigned permissions, ensuring a secure and controlled environment.
 
 
-___________________Features_________________________
+___________________Features_________________________-________________________________________________________________________________
 Guest Management
   Add, update, and delete guest records with ease.
   Assign and manage room allocations for each guest.
@@ -91,7 +91,7 @@ PGHub/
 
 
 
-********************************* How to Run the Project ********************************
+********************************* How to Run the Project ********************************>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 Prerequisites
   Node.js installed
   MongoDB database set up
