@@ -12,6 +12,7 @@ const StoreContextProvider=(props)=>
     const [token, setToken] = useState(localStorage.getItem("token") || "");
     const [user, setUser] = useState(null); // Store user details here
 
+
     // Fetch user details when token is set
     useEffect(() => {
         if (token) {

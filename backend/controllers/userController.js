@@ -4,6 +4,7 @@ const bcrypt = require("bcryptjs");
 const validator = require("validator");
 const nodemailer = require("nodemailer");
 const crypto = require("crypto");
+const { error } = require("console");
 require('dotenv').config();
 
 
@@ -129,6 +130,41 @@ const registeruser = async (req, res) => {
 
 
 
+const getAllUsers=async  (req,res)=>
+{
+    try {
+        const users = await User.find();
+        res.status(200).json(users);
+    } catch (error) {
+        res.status(500).json({ message: "Server error", error: error.message });
+    }
+
+}
+
+const deleteUser=async(req,res)=>
+{
+
+    const {userId}=req.params;
+    try{
+        const user= User.findById(userId)
+        if(!user)
+        {
+            return res.status(404).json({message:"user not found",success:false})
+        }
+
+        await User.findByIdAndDelete(userId);
+        res.status(200).json({ message: "user  deleted successfully" });
+        
+    }
+    catch(error)
+    {
+        res.status(500).json({ message: "Server error", error: error.message });
+    }
+}
+
+
+
+
 
 
 const forgotPassword = async (req, res) => {
@@ -228,5 +264,5 @@ const verifyOTP = async (req, res) => {
 };
 
 
-module.exports = { loginuser, registeruser, forgotPassword, verifyOTP };
+module.exports = { loginuser, registeruser, forgotPassword, verifyOTP,getAllUsers,deleteUser };
 

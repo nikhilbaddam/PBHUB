@@ -36,6 +36,24 @@ const GuestList = () => {
         fetchGuests();
     }, [url]);
 
+    const handleDeleteGuest = async (guestId) => {
+        const confirmDelete = window.confirm("Are you sure you want to delete this guest?");
+        if (!confirmDelete) return;
+
+        try {
+            await axios.delete(`${url}/guests/deleteguest/${guestId}`);
+            setGuests((prev) => prev.filter((guest) => guest._id !== guestId));
+            setFilteredGuests((prev) => prev.filter((guest) => guest._id !== guestId));
+            alert("Guest deleted successfully!");
+        } catch (error) {
+            console.error("Error deleting guest:", error);
+            alert("Failed to delete guest. Please try again.");
+        }
+    };
+
+
+
+
     const handleSearch = (e) => {
         const query = e.target.value.toLowerCase();
         setSearchQuery(query);
@@ -116,6 +134,7 @@ const GuestList = () => {
                                     handleImageClick={handleImageClick}
                                     handleUpdatePaymentClick={handleUpdatePaymentClick}
                                     togglePaymentHistory={() => setExpandedGuestId(expandedGuestId === guest._id ? null : guest._id)}
+                                    handleDeleteClick={() => handleDeleteGuest(guest._id)}
                                 />
                             ))
                         ) : (

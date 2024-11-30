@@ -1,9 +1,9 @@
 const mongoose=require('mongoose');
  const bedShema= new  mongoose.Schema({
     
-    floor:{type:Number},
+    floor:{type:String},
     section:{type:String},
-    room:{type:Number},
+    room:{type:String},
     bed:{type:Number},
     isOccupied:{type:Boolean,default:false},
     guestId:{type:String},

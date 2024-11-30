@@ -103,7 +103,7 @@ const Login = () => {
   };
 
   return (
-    <div className="flex justify-center w-full  items-center min-h-screen bg-gray-100 ">
+    <div className="flex justify-center w-full  items-center min-h-screen bg-gray-100 p-4">
       <div className="  w-full md:w-1/2 lg:w-1/4 bg-white p-6 rounded-lg shadow-lg">
         <h2 className="text-2xl font-semibold text-center mb-6">
           {isForgotPassword ? "Forgot Password" : "Login"}

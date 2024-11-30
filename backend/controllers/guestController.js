@@ -4,14 +4,14 @@ const Guest = require('../models/guestModel'); // Assuming the Guest model is in
 const { S3Client }=require('@aws-sdk/client-s3');
 const multerS3=require('multer-s3');
 const multer=require('multer');
-
+const Bed = require('../models/bedModel.js');
 
 
 
 // Configure AWS SDK
 
 const client= new S3Client({
-    region: "us-east-1", // Update this to your region
+    region: "ap-south-1", // Update this to your region
     credentials: {
         accessKeyId: process.env.AWS_ID,
         secretAccessKey: process.env.AWS_SECRET,
@@ -36,7 +36,7 @@ const upload = multer({
 
 
 // Controller to add a new guest
-const Bed = require('../models/bedModel.js');
+
 
 
 const addGuest = async (req, res) => {
@@ -117,6 +117,7 @@ const addGuest = async (req, res) => {
 
 
 const { DeleteObjectCommand } = require('@aws-sdk/client-s3');
+const bedModel = require('../models/bedModel.js');
 
 // Controller to update an existing guest
 const updateGuest = async (req, res) => {
@@ -196,8 +197,21 @@ const deleteGuest = async (req, res) => {
                 Bucket: process.env.AWS_BUCKET_NAME,
                 Key: guest.adhaarImage.split('.com/')[1],
             }));
-        }
 
+
+        }
+        
+       if(guest.bedId)
+       {
+          const bed=await  Bed.findById(guest.bedId);
+          if(bed)
+          {
+            bed.guestId="";
+            bed.isOccupied = false;
+            await bed.save();
+          }
+       }
+       
         // Remove guest from the database
         await Guest.findByIdAndDelete(id);
         res.status(200).json({ message: "Guest deleted successfully" });

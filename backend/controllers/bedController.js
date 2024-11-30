@@ -30,6 +30,7 @@ const addBed = async (req, res) => {
 
         res.status(201).json({ message: 'Bed added successfully', newBed });
     } catch (error) {
+        console.log(error)
         res.status(500).json({ message: 'Error adding bed', error: error.message });
     }
 };

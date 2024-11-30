@@ -5,9 +5,12 @@ const {
   registeruser,
   forgotPassword,
   verifyOTP,
+  getAllUsers,
+  deleteUser,
 } = require("../controllers/userController");
 const Auth = require("../middleware/Auth");
 const User = require("../models/userModel");
+const { getAllBeds } = require("../controllers/bedController");
 
 // create new user with unique email and username
 router.post("/register", registeruser);
@@ -31,5 +34,9 @@ router.get("/getuser", Auth, async (req, res) => {
     res.status(500).json({ message: "Server error." });
   }
 });
+
+
+router.get('/getusers',getAllUsers);
+router.delete('/deleteuser/:userId',deleteUser);
 
 module.exports = router;

@@ -6,6 +6,7 @@ const userSchema= mongoose.Schema({
     role:{typr:String,required:true},
     password:{type:String,required:true},
     role:{type:String,required:true },
+    salary:{type:Number},
     date:{type:Date,default:Date.now()},
     otp: { type: String },
     otpExpiry: { type: Date }

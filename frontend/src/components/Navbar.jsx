@@ -36,21 +36,21 @@ const Navbar = () => {
 
                 {/* Desktop Navigation */}
                 <ul className='hidden md:flex items-center gap-8 font-medium'>
-                    <NavLink to='/' className='hover:text-primary transition-colors duration-200'>
+                    <NavLink to='/' className={({ isActive }) => isActive ? ' underline underline-offset-4 text-primary font-bold' : 'hover:text-primary transition-colors duration-200'}>
                         <li>HOME</li>
                     </NavLink>
-                    <NavLink to='/addguests' className='hover:text-primary transition-colors duration-200'>
+                    <NavLink to='/addguests' className={({ isActive }) => isActive ? ' underline underline-offset-4 text-primary font-bold' : 'hover:text-primary transition-colors duration-200'}>
                         <li>ADDGUEST</li>
                     </NavLink>
-                    <NavLink to='/guestslist' className='hover:text-primary transition-colors duration-200'>
+                    <NavLink to='/guestslist' className={({ isActive }) => isActive ? ' underline underline-offset-4 text-primary font-bold' : 'hover:text-primary transition-colors duration-200'}>
                         <li>GUESTSLIST</li>
                     </NavLink>
                     {user?.role === 'admin' && (
                         <>
-                            <NavLink to='/admin' className='hover:text-primary transition-colors duration-200'>
+                            <NavLink to='/admin' className={({ isActive }) => isActive ? ' underline underline-offset-4 text-primary font-bold' : 'hover:text-primary transition-colors duration-200'}>
                                 <li>ADMIN</li>
                             </NavLink>
-                            <NavLink to='/worker' className='hover:text-primary transition-colors duration-200'>
+                            <NavLink to='/worker' className={({ isActive }) => isActive ? ' underline underline-offset-4 text-primary font-bold' : 'hover:text-primary transition-colors duration-200'}>
                                 <li>WORKER</li>
                             </NavLink>
                         </>
@@ -79,7 +79,7 @@ const Navbar = () => {
 
                 {/* Hamburger Menu Icon for Mobile */}
                 <div className='md:hidden flex items-center'>
-                    <button onClick={toggleMenu} className='text-2xl'>
+                    <button onClick={toggleMenu} className='text-2xl ' aria-label="Toggle navigation menu">
                         {showMenu ? <FaTimes /> : <FaBars />}
                     </button>
                 </div>

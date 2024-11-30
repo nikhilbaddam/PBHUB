@@ -96,11 +96,11 @@ const HotelBluePrint = () => {
                             }
                             className={`p-2 rounded font-medium text-sm ${
                               bed.isOccupied
-                                ? "bg-yellow-400 hover:bg-yellow-600"
-                                : "bg-red-400 hover:bg-red-600"
+                                ? "bg-blue-400 hover:bg-blue-600"
+                                : "bg-gray-200 hover:bg-red-600"
                             }`}
                           >
-                            Bed {bed.bed}
+                            {bed.isOccupied? `Bed${bed.bed}/Occupied`:`Bed ${bed.bed}`}
                           </button>
                         ))}
                       </div>
@@ -121,12 +121,7 @@ const HotelBluePrint = () => {
           <div className="bg-white rounded-lg w-[90%] max-w-lg p-6">
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-xl font-bold">Occupant Details</h2>
-              <button
-                onClick={() => setSelectedOccupant(null)}
-                className="text-gray-500 hover:text-black"
-              >
-                <FaTimes className="w-6 h-6" />
-              </button>
+              
             </div>
             <div className="space-y-4 h-80 overflow-y-scroll">
               <p>
